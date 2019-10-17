@@ -9,26 +9,29 @@ import java.util.Date;
 public class ServerThread implements Runnable{
 
     protected Socket clientSocket = null;
-    protected String serverText   = null;
+    private int clientIndex; //index, which is different for each client created
 
-    public ServerThread(Socket clientSocket, String serverText) {
+    public ServerThread(Socket clientSocket, int clientIndex) {
         this.clientSocket = clientSocket;
-        this.serverText   = serverText;
+        this.clientIndex = clientIndex;
     }
 
     public void run() {
         try {
             // Create data input and output streams
-            DataInputStream isFromClient = new DataInputStream(
+            DataInputStream inFromClient = new DataInputStream(
                     this.clientSocket.getInputStream());
-            DataOutputStream osToClient = new DataOutputStream(
+            DataOutputStream outToClient = new DataOutputStream(
                     this.clientSocket.getOutputStream());
 
-            // Display the client number
+            // Display the date, when the client connection was made
             System.out.println("Connected to a client " + " at " + new Date() + '\n');
 
             while (true) {
-                //Do communication with client here
+                //tells the first message to the client, that they're
+                // connected and which client are they
+                outToClient.writeUTF("You connected as number " + clientIndex);
+
             }
 
         } catch (IOException e) {
