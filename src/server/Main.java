@@ -11,7 +11,7 @@ public class Main {
         try {
             // Create a server socket
             ServerSocket serverSocket = new ServerSocket(8000);
-            System.out.println("Loan Server started at " + new Date() + '\n');
+            System.out.println("Server started at " + new Date() + '\n');
             //Accept clients while running
             while (true) {
                 Socket clientSocket = null;
