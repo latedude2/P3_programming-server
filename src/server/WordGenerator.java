@@ -3,6 +3,10 @@ package server;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
 
 public class WordGenerator{
     private String[] wordList = new String[969];
@@ -21,8 +25,15 @@ public class WordGenerator{
                 wordAmount++;
                 line = bufferedReader.readLine();
             }
-            for(int i = 0; i < 25; i++){
-                wordsToDisplay[i] = wordList[getRandom(968)];
+            Set<String> wordListSet = new HashSet<>();
+            Collections.addAll(wordListSet, wordList);
+            int size = wordListSet.size();
+            int item = new Random().nextInt(size);
+            
+            for(int j = 0; j < 25; j++)
+            {
+                    wordsToDisplay[j] = wordListSet.toArray(new String[wordListSet.size()])[item];                    
+                item = new Random().nextInt(size);      
             }
         }
         catch(IOException e){
