@@ -8,13 +8,12 @@ public class WordGenerator{
     private String[] wordList = new String[969];
     private String[] wordsToDisplay = new String[25];
 
-
     public void readFile(){
         try{
             String fileName = "src/server/data/wordsList.txt"; //path of the text file with words
             int wordAmount = 0; // Used to fill the words in the list
-            FileReader fileReader = new FileReader(fileName);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            BufferedReader bufferedReader = new BufferedReader(
+                    new FileReader(fileName));
             String line = bufferedReader.readLine();
             while(line != null){
                 wordList[wordAmount] = line;
@@ -32,8 +31,14 @@ public class WordGenerator{
     }
 
     public int getRandom(int max){
-        double rand = Math.random()*max;
-        return (int)rand;
+        return (int)(Math.random()*max);
     }
 
+    public String[] getWordsToDisplay() {
+        return wordsToDisplay;
+    }
+
+    public String getWord(int index) {
+        return wordsToDisplay[index];
+    }
 }

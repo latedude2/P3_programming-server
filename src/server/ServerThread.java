@@ -1,8 +1,6 @@
 package server;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
 import java.util.Date;
 
@@ -24,8 +22,12 @@ public class ServerThread implements Runnable{
             DataOutputStream outToClient = new DataOutputStream(
                     this.clientSocket.getOutputStream());
 
+            //streams for objects to send
+            ObjectInputStream objectFromClient = new ObjectInputStream(inFromClient);
+            ObjectOutputStream objectToClient = new ObjectOutputStream(outToClient);
+
             // Display the date, when the client connection was made
-            System.out.println("Connected to a client " + " at " + new Date() + '\n');
+            System.out.println("Connected to a client at " + new Date() + '\n');
 
             while (true) {
                 //tells the first message to the client, that they're
