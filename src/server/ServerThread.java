@@ -33,7 +33,6 @@ public class ServerThread implements Runnable{
                 //tells the first message to the client, that they're
                 // connected and which client are they
                 outToClient.writeUTF("You connected as number " + clientIndex);
-
             }
 
         } catch (IOException e) {

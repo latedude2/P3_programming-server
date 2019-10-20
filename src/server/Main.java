@@ -8,22 +8,18 @@ public class Main {
         WordGenerator wordGenerator = new WordGenerator();
         wordGenerator.readFile();
 
-        Cards[] cards = new Cards[wordGenerator.getWordsToDisplay().length];
+        //method for Cards array creation and randomization
+        Cards[] cards = randomizeCardsArray(
+                createCardValues(wordGenerator, new Cards[wordGenerator.getWordsToDisplay().length]));
 
-        cards = createCardValues(wordGenerator, cards);
-
-        //method for array randomization
-        cards = randomizeCardsArray(cards);
-
-        // just for displaying the values of cards
-        for (int i = 0; i < cards.length; i++)
-            System.out.println(cards[i].getNumber() + " " + cards[i].getName());
+        //displaying the values of cards (needed just for visualization while coding)
+        for (Cards card : cards) System.out.println(card.getNumber() + " " + card.getName());
 
         ClientConnect clientConnect = new ClientConnect();
         clientConnect.createClient();
     }
 
-    public static Cards[] randomizeCardsArray(Cards[] array){
+    static Cards[] randomizeCardsArray(Cards[] array){
         Random random = new Random();  // Random number generator
 
         for (int i=0; i<array.length; i++) {
@@ -38,15 +34,15 @@ public class Main {
     static Cards[] createCardValues(WordGenerator wordGenerator, Cards[] cards){
         for (int i = 0; i < wordGenerator.getWordsToDisplay().length; i++){
             cards[i] = new Cards();
-            cards[i].setName(wordGenerator.getWord(i));
+            cards[i].setName(wordGenerator.getWord(i)); //sets the name of the card from the respective word in the wordlist
             if (i == 0)
-                cards[i].setNumber(0);
+                cards[i].setNumber(0); // first card for death
             else if (i <= 7)
-                cards[i].setNumber(1);
+                cards[i].setNumber(1); // 7 cards as neutral
             else if (i <= 15)
-                cards[i].setNumber(2);
+                cards[i].setNumber(2); // 8 cards for blue team
             else
-                cards[i].setNumber(3);
+                cards[i].setNumber(3); // 9 cards for red team
         }
         return cards;
     }
