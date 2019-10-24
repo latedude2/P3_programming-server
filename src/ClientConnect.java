@@ -1,5 +1,3 @@
-package server;
-
 import java.io.*;
 import java.net.*;
 import java.util.*;
@@ -19,13 +17,15 @@ public class ClientConnect {
             while (true) {
                 Socket clientSocket = null;
                 try {
+                    System.out.println("Waiting for the client");
                     clientSocket = serverSocket.accept(); //accepts the client from the socket
                 } catch (IOException e) {
                     throw new RuntimeException(
                             "Error accepting client connection", e);
                 }
 
-                thread[threadCount] = new Thread(new ServerThread(clientSocket,threadCount));
+                System.out.println("client came");
+                thread[threadCount] = new Thread(new ServerThread(clientSocket, threadCount));
                 thread[threadCount].start();
                 threadCount++;
             }
@@ -33,9 +33,5 @@ public class ClientConnect {
         catch(IOException e) {
             System.err.println(e);
         }
-    }
-
-    public int getThreadCount() {
-        return threadCount;
     }
 }

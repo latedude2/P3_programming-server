@@ -1,6 +1,6 @@
-package server;
+import java.io.*;
 
-public class Cards {
+public class Card implements Serializable {
 
     private String name;
     private int number;

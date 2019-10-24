@@ -1,5 +1,3 @@
-package server;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -10,7 +8,7 @@ public class WordGenerator{
 
     public void readFile(){
         try{
-            String fileName = "src/server/data/wordsList.txt"; //path of the text file with words
+            String fileName = "src/wordsList.txt"; //path of the text file with words
             int wordAmount = 0; // Used to fill the words in the list
             BufferedReader bufferedReader = new BufferedReader(
                     new FileReader(fileName));
