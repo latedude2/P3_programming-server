@@ -15,14 +15,14 @@ public class ServerThread implements Runnable{
     boolean connection = true;
 
     public Socket clientSocket;
-    private int clientIndex; //index, which is different for each client created
+    private static int clientIndex; //index, which is different for each client created
 
     private Card[] cards = Main.getCards();
 
-    private String hintWord = "";
-    private int hintNumber = 0;
+    private static String hintWord = "";
+    private static int hintNumber = 0;
 
-    private int guessedWord;
+    private static int guessedWord;
 
     ServerThread(Socket clientSocket, int clientIndex) {
         this.clientSocket = clientSocket;
@@ -51,10 +51,21 @@ public class ServerThread implements Runnable{
                 while (connection) {
                     //---------------SENT TO EVERYONE--------------------------------
                     updateGame();
-
                     //----------------------------------------------------------------
+                    // Checking the number of turn and then doing stuff
+                    //makeInstructorTurn();
+                    //updateGame();
 
-                    // Checking the number of turn and then do stuff
+                    /*while (GameState.getTurn() == 1){
+                        if (clientIndex == 1){
+                            guessedWord = inFromClient.readInt();
+                            cards[guessedWord].setPlayed(true);
+                            GameState.setTurn(GameState.getTurn() + 1); //increase the turn number to go out of loop
+                        }
+                    }*/
+                    //makeGuessTurn();
+                    //updateGame();
+
                     // first instructor stuff
                     while (GameState.getTurn() == 0) {
                         if (clientIndex == 0) {
@@ -67,10 +78,8 @@ public class ServerThread implements Runnable{
                             GameState.setTurn(GameState.getTurn() + 1);
                         }
                     }
-
-                    //sending instructor's word and number of words to everyone
+                    //sending cards, instructor's word and number to everyone and giving them the turn number
                     updateGame();
-
                     //first guesser's turn
                     while (GameState.getTurn() == 1){
                         if (clientIndex == 1){
@@ -79,8 +88,7 @@ public class ServerThread implements Runnable{
                             GameState.setTurn(GameState.getTurn() + 1); //increase the turn number to go out of loop
                         }
                     }
-                     updateGame();
-
+                    updateGame();
                     Thread.sleep(1000000); // temporary thing for easier coding
                     connection = false; //at the end make connection false
                 }
@@ -93,71 +101,65 @@ public class ServerThread implements Runnable{
         }
     }
 
+    //for sending the information to every client
     void updateGame() throws IOException {
-        for (Card card : cards) {
+        //send all the list of cards
+        for (Card card : cards)
             objectToClient.writeObject(card);
-        }
-
+        //send the hint word (if there's no hint word yet, it is made to be "")
         outToClient.writeUTF(hintWord);
+        //send the number of hint words (if there's no number, it is made to be 0)
         outToClient.writeInt(hintNumber);
-
-        outToClient.writeInt(GameState.getTurn()); //sending the number of which turn is it
+        //sending the number of which turn is it
+        outToClient.writeInt(GameState.getTurn());
     }
 
+    //to get the info from the instructors
     void makeInstructorTurn() throws IOException{
-        if (GameState.getTurn()%2 == 0){
-            // first instructor stuff
-            while (GameState.getTurn() == 0) {
-                if (clientIndex == 0) {
-                    hintWord = inFromClient.readUTF();
-                    System.out.println(hintWord);
-                    hintNumber = inFromClient.readInt();
+        // first instructor stuff
+        while (GameState.getTurn() == 0) { //while turn is for 0th instructor
+            if (clientIndex == 0) {
+                hintWord = inFromClient.readUTF();
+                System.out.println(hintWord);
+                hintNumber = inFromClient.readInt();
 
-                    System.out.println(hintWord + " " + hintNumber);
+                System.out.println(hintWord + " " + hintNumber);
 
-                    GameState.setTurn(GameState.getTurn() + 1);
-                }
+                GameState.setTurn(GameState.getTurn() + 1);
             }
-            //sending cards, instructor's word and number to everyone and giving them the turn number
-            updateGame();
+        }
+        //while turn is for 2nd instructor
+        while (GameState.getTurn() == 2) {
+            if (clientIndex == 2) {
+                hintWord = inFromClient.readUTF();
+                System.out.println(hintWord);
+                hintNumber = inFromClient.readInt();
 
-            while (GameState.getTurn() == 2) {
-                if (clientIndex == 2) {
-                    hintWord = inFromClient.readUTF();
-                    System.out.println(hintWord);
-                    hintNumber = inFromClient.readInt();
+                System.out.println(hintWord + " " + hintNumber);
 
-                    System.out.println(hintWord + " " + hintNumber);
-
-                    GameState.setTurn(GameState.getTurn() + 1);
-                }
+                GameState.setTurn(GameState.getTurn() + 1);
             }
-            //sending cards, instructor's word and number to everyone and giving them the turn number
-            updateGame();
         }
     }
 
+    //to get the information from guessers
     void makeGuessTurn() throws IOException{
-        if (GameState.getTurn()%2 == 1) {
-            //first guesser's turn
-            while (GameState.getTurn() == 1) {
-                if (clientIndex == 1) {
-                    guessedWord = inFromClient.readInt();
-                    cards[guessedWord].setPlayed(true);
-                    GameState.setTurn(GameState.getTurn() + 1); //increase the turn number to go out of loop
-                }
+        //1st guesser's turn
+        while (GameState.getTurn() == 1) {
+            if (clientIndex == 1) {
+                guessedWord = inFromClient.readInt(); //get the integer of the word in the list
+                cards[guessedWord].setPlayed(true); //set to the played status
+                GameState.setTurn(GameState.getTurn() + 1); //increase the turn number to go out of loop
             }
-            updateGame();
+        }
 
-            //second guesser's turn
-            while (GameState.getTurn() == 3) {
-                if (clientIndex == 3) {
-                    guessedWord = inFromClient.readInt();
-                    cards[guessedWord].setPlayed(true);
-                    GameState.setTurn(GameState.getTurn() + 1); //increase the turn number to go out of loop
-                }
+        // 2nd guesser's turn
+        while (GameState.getTurn() == 3) {
+            if (clientIndex == 3) {
+                guessedWord = inFromClient.readInt();
+                cards[guessedWord].setPlayed(true);
+                GameState.setTurn(GameState.getTurn() + 1); //increase the turn number to go out of loop
             }
-            updateGame();
         }
     }
 }
