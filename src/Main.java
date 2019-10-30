@@ -18,6 +18,9 @@ public class Main {
 
         ClientConnect clientConnect = new ClientConnect();
         clientConnect.createClient();
+        clientConnect.createClient();
+        clientConnect.createClient();
+        clientConnect.createClient();
     }
 
     static Card[] randomizeCardsArray(Card[] array){

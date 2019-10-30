@@ -24,7 +24,7 @@ public class ClientConnect {
                             "Error accepting client connection", e);
                 }
 
-                System.out.println("client came");
+                System.out.println("Client " + threadCount + " has connected");
                 thread[threadCount] = new Thread(new ServerThread(clientSocket, threadCount));
                 thread[threadCount].start();
                 threadCount++;

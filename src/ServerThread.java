@@ -31,21 +31,24 @@ public class ServerThread implements Runnable{
 
     public void run(){
         try {
-            // Create data input and output streams
-            inFromClient = new DataInputStream(
-                    clientSocket.getInputStream());
-            outToClient = new DataOutputStream(
-                    clientSocket.getOutputStream());
-
-            //streams for objects to send
-            objectToClient = new ObjectOutputStream(outToClient);
-            objectFromClient = new ObjectInputStream(inFromClient);
-
             // Display the date, when the client connection was made
             System.out.println("Connected to a client at " + new Date() + '\n');
 
+
+            // Create data input and output streams
+            inFromClient = new DataInputStream(clientSocket.getInputStream());
+            outToClient = new DataOutputStream(clientSocket.getOutputStream());
+
+            //streams for objects to send
+            System.out.println("Creating object streams");
+            objectToClient = new ObjectOutputStream(outToClient);
+            objectFromClient = new ObjectInputStream(inFromClient);
+            System.out.println("Finished creating object streams");
+
+            
             outToClient.writeUTF("You connected as number " + clientIndex);
             outToClient.writeInt(clientIndex);
+            outToClient.writeInt(GameState.getTurn());
 
             try {
                 while (connection) {
