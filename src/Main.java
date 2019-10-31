@@ -18,14 +18,12 @@ public class Main {
 
         ClientConnect clientConnect = new ClientConnect();
         clientConnect.createClient();
-        clientConnect.createClient();
-        clientConnect.createClient();
-        clientConnect.createClient();
     }
 
     static Card[] randomizeCardsArray(Card[] array){
         Random random = new Random();  // Random number generator
 
+        //composing an array of random words from the word list
         for (int i=0; i<array.length; i++) {
             int randomPosition = random.nextInt(array.length);
             Card temp = array[i];
