@@ -26,7 +26,7 @@ public class Main {
         //composing an array of random words from the word list
         for (int i=0; i<array.length; i++) {
             int randomPosition = random.nextInt(array.length);
-            
+
             Card temp = array[i];
             array[i] = array[randomPosition];
             array[randomPosition] = temp;
