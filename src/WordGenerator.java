@@ -50,4 +50,16 @@ class WordGenerator{
                 e.printStackTrace();
         }
     }
+
+    public int getRandom(int max){
+        return (int)(Math.random()*max);
+    }
+
+    public String[] getWordsToDisplay() {
+        return wordsToDisplay;
+    }
+
+    public String getWord(int index) {
+        return wordsToDisplay[index];
+    }
 }
