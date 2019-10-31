@@ -14,7 +14,7 @@ class WordGenerator{
     void readFile(){
         try{
             
-            String fileName = "src/server/data/wordsList.txt"; //Path of the text file with words
+            String fileName = "src/wordsList.txt"; //Path of the text file with words
             int wordAmount = 0; //Used to fill the words in the list
 
             //Read from text file and save in a string
