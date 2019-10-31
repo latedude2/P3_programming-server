@@ -10,7 +10,7 @@ public class ClientConnect {
     void createClient(){
         try {
             // Create a server socket
-            ServerSocket serverSocket = new ServerSocket(8000);
+            ServerSocket serverSocket = new ServerSocket(5000);
             System.out.println("Server started at " + new Date() + '\n');
 
             //Accept clients while running
@@ -24,8 +24,9 @@ public class ClientConnect {
                             "Error accepting client connection", e);
                 }
 
-                System.out.println("Client " + threadCount + " has connected");
-                thread[threadCount] = new Thread(new ServerThread(clientSocket, threadCount));
+                System.out.println("client came");
+                GameState.addClientID(clientSocket.getPort()); //adding the port to a list of clients so they can be messaged individually
+                thread[threadCount] = new Thread(new ServerThread(clientSocket, threadCount)); //creating a thread for the client
                 thread[threadCount].start();
                 threadCount++;
             }
