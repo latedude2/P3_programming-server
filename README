@@ -1,4 +1,9 @@
 This is the server side of MED3 PCSS miniproject of group 301.
 
-
 The client side can be found here: https://github.com/MikkMunk/P3_programming-client
+
+Other information regarding the game and the server can be found in the Wiki of the repository, including:
+  - How to download and run the game
+  - How to play the game
+  - Descriptions of classes (Word Generator)
+  - UML Diagrams (Class, Sequence, Use case)
