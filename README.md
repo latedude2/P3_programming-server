@@ -1,4 +1,7 @@
-This is the server side of MED3 PCSS miniproject of group 301.
+# P3 programming server
+
+This is the server side of MED3 PCSS miniproject of group 301 ( Abderrahman Mhadden, Dovilė Perednytė, Jokūbas Serapinas, Julie Ulnits Sørensen, Mikkel Munk, Sara Munk, Simonas Čeponis).
+
 
 The client side can be found here: https://github.com/MikkMunk/P3_programming-client
 
