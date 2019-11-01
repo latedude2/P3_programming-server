@@ -32,29 +32,17 @@ class WordGenerator{
             String[] array = wordListSet.toArray(new String[wordListSet.size()]);
             Set<String> wordsToDisplaySet = new HashSet<>();
 
-            //System.out.println(wordListSet);
-
-
 
             //Create array of words to display from set
             for(int j = 0; j < 25; j++)
             {
                 int item = new Random().nextInt(array.length); //Random number from the set's size
-                System.out.println(item);
-                System.out.println(array[item]);
                 wordsToDisplaySet.add(array[item]);
-                System.out.println(wordsToDisplaySet);
 
                 wordsToDisplay = wordsToDisplaySet.toArray(new String[wordsToDisplaySet.size()]);
 
-
-                //System.out.println(wordsToDisplay[j]);
             }
-            System.out.println(Arrays.toString(array));
-            System.out.println(Arrays.toString(wordsToDisplaySet.toArray(new String[wordsToDisplaySet.size()])));
-            System.out.println(Arrays.toString(wordsToDisplay));
-            System.out.println(array.length);
-            System.out.println(wordsToDisplaySet);
+
 
             bufferedReader.close();
         }
