@@ -2,39 +2,3 @@ This is the server side of MED3 PCSS miniproject of group 301.
 
 
 The client side can be found here:
-
-
-
-
-
-
-# Starting the game:
-
-The game requires 4 clients to connect, and cannot be played with less, or if someone disconnects along the way. Firstly, one person has to run the server and the 4 clients join one by one.
-
-The order the clients connect dictates which role they will be filling, and which team they will be on:
-
-1st connected = instructor on the red team
-
-2nd connected = guesser on the red team
-
-3rd connected = instructor on the blue team
-
-4th connected = guesser on the blue team
-
-when it is your turn, the client will load a visual UI display, showing you your role, team, current hint word, current allowed guesses, a submit button, and the 25 word cards. Once your turn is over and you have given your input, the UI will close down, and reload with updated information on your next turn.
-
-# Instructor:
-
-If you are an instructor, the word cards will load with light colors applied to them, indicating which category/team they belong to. Additionally, the two textfields at the bottom will be interactable, allowing you to input your hint in one and the amount of guesses for that hint in the other. Additionally, the submit button will have an action listener, ending your turn and sending the information you put into the textfields to the server. On subsequent turns, the cards that have already been guessed appear in a darker shade of their color.
-
-# Guesser:
-
-As a guesser, all the word cards will appear white until they have been guessed, either by you or the other guesser. on your turn, all the word cards have action listeners applied to them, so that they can be clicked. So you read the hint given by you team's instructor, and then have an amount of guesses equal to the guess number they gave you; if you guess wrong however, your turn will end early.
-(!!sometimes when the guesser's turn ends, they receive an error message; however this has no impact on the game itself, and all players are able to continue playing undisturbed!!)
-
-# When the game is over:
-
-When either team has all the words in their color guessed, or if someone guesses the black word(the assasin card), the game will end. The game is ended by the server, which will print a message stating which team has won, and then close down the sockets; so only the server can see which team has won.
-
-
