@@ -4,6 +4,7 @@ The client side can be found here: https://github.com/MikkMunk/P3_programming-cl
 
 Other information regarding the game and the server can be found in the Wiki of the repository, including:
   - How to download and run the game
+  - Rules of the original "Codenames" game
   - How to play the game
-  - Descriptions of classes (Word Generator)
-  - UML Diagrams (Class, Sequence, Use case)
+  - Word generation principles and source
+  - UML Diagrams for the server side (Class, Sequence, Use case)
