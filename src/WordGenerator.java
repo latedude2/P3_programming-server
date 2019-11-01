@@ -1,10 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 class WordGenerator{
 
@@ -29,19 +26,24 @@ class WordGenerator{
                 line = bufferedReader.readLine();
             }
 
-            //Create set to avoid word repitition
+            //Create set to avoid word repetition
             Set<String> wordListSet = new HashSet<>();
             Collections.addAll(wordListSet, wordList);
+            String[] array = wordListSet.toArray(new String[wordListSet.size()]);
+            Set<String> wordsToDisplaySet = new HashSet<>();
 
-            int size = wordListSet.size(); //Size of the set
-            int item = new Random().nextInt(size); //Random number from the set's size
-            
+
             //Create array of words to display from set
             for(int j = 0; j < 25; j++)
             {
-                wordsToDisplay[j] = wordListSet.toArray(new String[size])[item];                    
-                item = new Random().nextInt(size);      
+                int item = new Random().nextInt(array.length); //Random number from the set's size
+                wordsToDisplaySet.add(array[item]);
+
+                wordsToDisplay = wordsToDisplaySet.toArray(new String[wordsToDisplaySet.size()]);
+
             }
+
+
             bufferedReader.close();
         }
         catch(IOException e){

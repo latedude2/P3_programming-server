@@ -1,5 +1,3 @@
-import java.net.InetAddress;
-
 class GameState {
 
     private static int turn = 0; //keeping track of which turn we are at in the game
