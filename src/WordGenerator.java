@@ -45,7 +45,7 @@ class WordGenerator{
                 wordsToDisplaySet.add(array[item]);
                 System.out.println(wordsToDisplaySet);
 
-                wordsToDisplay[j] = wordsToDisplaySet.toArray(new String[wordsToDisplaySet.size()])[j];
+                wordsToDisplay = wordsToDisplaySet.toArray(new String[wordsToDisplaySet.size()]);
 
 
                 //System.out.println(wordsToDisplay[j]);
